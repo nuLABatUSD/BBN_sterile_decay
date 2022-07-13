@@ -7,7 +7,7 @@ YEAR = 2019
 # Choose your compilers here (usually gcc/gfortran on Linux systems):
 CC = gcc
 CFLAGS= -O3 -pipe -fomit-frame-pointer -mtune=native -ffast-math -fno-finite-math-only
-CFLAGS_MP= -fopenmp
+#CFLAGS_MP= -fopenmp
 
 #CC = clang
 #CFLAGS= -O3 -pipe -fomit-frame-pointer -mtune=native -ffast-math -fno-finite-math-only 
@@ -21,7 +21,7 @@ MAKE = make
 MAKE_MP = -j$(nproc)
 
 AR = ar
-ARFLAGS = rcsU
+ARFLAGS = rcsu
 #ARFLAGS = rcs
 
 

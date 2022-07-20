@@ -9,6 +9,13 @@
 
 int main(int argc, char** argv)
 {
+   /*printf("here\n");
+    
+   if (argc==8)
+	{
+        printf("here 1\n");
+    }  */ 
+    
 	struct relicparam paramrelic;
 	double ratioH[NNUC+1],cov_ratioH[NNUC+1][NNUC+1];
 	double H2_H, He3_H, Yp, Li7_H, Li6_H, Be7_H;
@@ -33,6 +40,7 @@ int main(int argc, char** argv)
 		"   ns0         initial number density of sterile neutrinos in units of MeV^3.\n"
 		"   mass        The mass of the sterile neutrino model of interest.\n"
 	  "   mix         The mixing angle of the sterile neutrino model of interset.\n");
+        //printf("hi");
 		exit(1);
 	}
 	else
@@ -47,7 +55,9 @@ int main(int argc, char** argv)
 		sscanf(argv[6],"%lf",&ms_d);
 		sscanf(argv[7],"%lf",&mix_d);
 	}
-
+    
+    //printf("here 2\n");
+    
 	Init_cosmomodel(&paramrelic); //this sets the values of paramrelic that *every* model will use, other init functions set specific values that only that model uses
 
 	paramrelic.failsafe = failsafe;
@@ -56,24 +66,28 @@ int main(int argc, char** argv)
 	Init_cosmomodel_param(eta,paramrelic.Nnu,0.,paramrelic.life_neutron,paramrelic.life_neutron_error,0.,0.,0.,&paramrelic);
 	// why are Nnu, life_neutron, and life_neutron_error defined above by Init_cosmomodel_param when alter_eta supposedly just... alters eta?
 	paramrelic.Tinit=Tinit*1.e-3/K_to_eV; //setting Tinit, why isn't this done in Init_cosmomodel_param?
-
+    
+    //printf("here 4\n");
+    
 	Init_vs(ms_ch, mix_ch, ms_d, mix_d, ns0, row, &paramrelic);
-
+    
+    //printf("here 3 !!!!! \n");
+    
 	printf("\t Yp\t\t H2/H\t\t He3/H\t\t Li7/H\t\t Li6/H\t\t Be7/H\n");
-	paramrelic.err=2;
-	nucl(&paramrelic,ratioH);
-	H2_H=ratioH[3];Yp=ratioH[6];Li7_H=ratioH[8];Be7_H=ratioH[9];He3_H=ratioH[5];Li6_H=ratioH[7];
-	printf("  low:\t %.3e\t %.3e\t %.3e\t %.3e\t %.3e\t %.3e\n",Yp,H2_H,He3_H,Li7_H,Li6_H,Be7_H);
+	//paramrelic.err=2;
+	//nucl(&paramrelic,ratioH);
+	//H2_H=ratioH[3];Yp=ratioH[6];Li7_H=ratioH[8];Be7_H=ratioH[9];He3_H=ratioH[5];Li6_H=ratioH[7];
+	//printf("low:\t %.3e\t %.3e\t %.3e\t %.3e\t %.3e\t %.3e\n",Yp,H2_H,He3_H,Li7_H,Li6_H,Be7_H);
 
 	paramrelic.err=0;
 	nucl(&paramrelic,ratioH);
 	H2_H=ratioH[3];Yp=ratioH[6];Li7_H=ratioH[8];Be7_H=ratioH[9];He3_H=ratioH[5];Li6_H=ratioH[7];
-	printf(" cent:\t %.3e\t %.3e\t %.3e\t %.3e\t %.3e\t %.3e\n",Yp,H2_H,He3_H,Li7_H,Li6_H,Be7_H);
+	printf("cent:\t %.3e\t %.3e\t %.3e\t %.3e\t %.3e\t %.3e\n",Yp,H2_H,He3_H,Li7_H,Li6_H,Be7_H);
 
-	paramrelic.err=1;
-	nucl(&paramrelic,ratioH);
-	H2_H=ratioH[3];Yp=ratioH[6];Li7_H=ratioH[8];Be7_H=ratioH[9];He3_H=ratioH[5];Li6_H=ratioH[7];
-	printf(" high:\t %.3e\t %.3e\t %.3e\t %.3e\t %.3e\t %.3e\n\n",Yp,H2_H,He3_H,Li7_H,Li6_H,Be7_H);
+	//paramrelic.err=1;
+	//nucl(&paramrelic,ratioH);
+	//H2_H=ratioH[3];Yp=ratioH[6];Li7_H=ratioH[8];Be7_H=ratioH[9];He3_H=ratioH[5];Li6_H=ratioH[7];
+	//printf("high:\t %.3e\t %.3e\t %.3e\t %.3e\t %.3e\t %.3e\n\n",Yp,H2_H,He3_H,Li7_H,Li6_H,Be7_H);
 
 
 	/*paramrelic.err=3;

@@ -68,7 +68,7 @@ def clean_directory(directory, file):
 # In[15]:
 
 
-def output_plots_alter_vs(nu_start, nu_end, nu_steps, run_directory_new):   
+def output_plots_alter_vs(nu_start, nu_end, nu_steps, run_directory_new, row, ns0, mass, mixangle):   
     #nu = np.linspace(1e-10, 10e-10, 40)
     nu = np.linspace(nu_start, nu_end, nu_steps)
 
@@ -82,9 +82,9 @@ def output_plots_alter_vs(nu_start, nu_end, nu_steps, run_directory_new):
     a = 0
 
     for i in nu:
-        d = subprocess.run([run_directory_new, '14.87365053664758', str(i), '1', '255', '104.56255360706342', '300', '7e-05'], capture_output = True, text = True, shell = True)
-        #print(d)
-        #print(d.stderr)
+        d = subprocess.run([run_directory_new, '14.87365053664758', str(i), '1', row, ns0, mass, mixangle], capture_output = True, text = True, shell = True)
+        print(d)
+        print(d.stderr)
         x = d.stdout
         #print(x)
         s = x.split('\t')

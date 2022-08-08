@@ -59,9 +59,64 @@ def delete_file(file):
 # **Enter the directory your alter_eta_edit.c file can be found in in the variable 'directory' below:**
 
 # In[6]:
+def eta_element_string_vs(eta_value, run_directory):
+    #eta_values = [low_value, med_value, high_value] #enter whatever eta values you want to go through here 
+    
+    c=0
+    a = []
+    #dict = ['Time(s)', 'a', 'T(MeV)', 'Tnu (GK)', 'Photons', 'Baryons', 'Neutrinos', 'Phi (GeV^4)', 'Y(n)', 'Y(p)', 'Y(2H)', 'Y(4He)', 'Y(7Li)', 'Y(Be7)', 'eta']
 
+    #print(os.getcwd())
 
-def eta_element_string(eta_value, run_directory):
+    #for i in eta_values:
+        #print(i)
+    d = subprocess.run([run_directory, '14.87365053664758', str(eta_value), '1', '255', '104.56255360706342', '300', '7e-05'], capture_output = True, text = True, shell = True)
+    #print(d)
+    #print(d.stderr)
+
+    check_file = Path("evolution_vs.out")
+
+    if check_file.is_file():
+        print('there is a file!')
+        text = open('evolution_vs.out', "r").readlines()
+
+        aa = text[0]
+        dict_temp = aa.split(',')
+        dict_temp = [x.strip(' ') for x in dict_temp]
+        #print(dict_temp)
+
+        df = pd.DataFrame(columns = dict_temp)
+        #print("df print: {}".format(df))
+        
+        for i in range(1, len(text)):
+            a = text[i]
+            b = a.split(',')
+            df.loc[i] = b
+
+        df = df.replace({'\n':''},regex=True)
+        df = df.apply(pd.to_numeric)
+        #print("df print 2: {}".format(df))
+        #df['T (MeV)'] = df['T (MeV)'].apply(lambda x: GK_to_MeV(x))  ##for running original code and getting MeV outputs'
+        
+        #if c == 0:
+        temperature_str = df['T (MeV)'].to_numpy()
+        Y_n_str = df['Y(n)'].to_numpy()
+        Y_p_str = df['Y(p)'].to_numpy()
+        Y_2H_str = df['Y(2H)'].to_numpy()
+        Y_4He_str = df['Y(4He)'].to_numpy()
+        Y_7Li_str = df['Y(7Li)'].to_numpy()
+        Y_Be7_str = df['Y(7Be)'].to_numpy()
+        
+        #print("got here!")
+
+    else:
+        print('output file was not created')
+        
+    #print("got here #2!")    
+    
+    return temperature_str, Y_n_str, Y_p_str, Y_2H_str, Y_4He_str, Y_7Li_str, Y_Be7_str, eta_value
+
+def eta_element_string_e(eta_value, run_directory):
     #eta_values = [low_value, med_value, high_value] #enter whatever eta values you want to go through here 
     
     c=0
@@ -147,7 +202,7 @@ def generate_plots_eta_element_temp(temperature_str_high, Y_n_str_high, Y_p_str_
     plt.loglog(temperature_str_med, Y_4He_str_med, color = 'purple', label = '${}^4 Helium$')
     plt.loglog(temperature_str_med, Y_7Li_str_med, color = 'magenta', label = '${}^7 Lithium$')
     plt.loglog(temperature_str_med, Y_Be7_str_med, color = 'salmon', label = '${}^7 Beryllium$')
-    plt.xlim(10e-1, 10e-4)
+    #plt.xlim(10e-1, 10e-4)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance (Y)')
     plt.legend()
@@ -156,8 +211,8 @@ def generate_plots_eta_element_temp(temperature_str_high, Y_n_str_high, Y_p_str_
     plt.loglog(temperature_str_low, Y_n_str_low, color = 'purple', linestyle  = ':', label = '$\eta$ value is {}'.format(eta_value_low))
     plt.loglog(temperature_str_med, Y_n_str_med, color = 'pink', linestyle  = '--', label = '$\eta$ value is {}'.format(eta_value_med))
     plt.loglog(temperature_str_high, Y_n_str_high, color  = 'orange', label = '$\eta$ value is {}'.format(eta_value_high))
-    plt.xlim(10e-1, 10e-4)
-    plt.ylim(10**-16, 10**0)
+    #plt.xlim(10e-1, 10e-4)
+    #plt.ylim(10**-16, 10**0)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance of Neutrons: Y(n)')
     plt.legend()
@@ -166,7 +221,7 @@ def generate_plots_eta_element_temp(temperature_str_high, Y_n_str_high, Y_p_str_
     plt.loglog(temperature_str_low, Y_p_str_low, color = 'purple', linestyle  = ':', label = '$\eta$ value is {}'.format(eta_value_low))
     plt.loglog(temperature_str_med, Y_p_str_med, color = 'pink', linestyle  = '--', label =  '$\eta$ value is {}'.format(eta_value_med))
     plt.loglog(temperature_str_high, Y_p_str_high, color  = 'orange', label = '$\eta$ value is {}'.format(eta_value_high))
-    plt.xlim(10e-1, 10e-4)
+    #plt.xlim(10e-1, 10e-4)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance of Protons: Y(p)')
     plt.legend()
@@ -175,7 +230,7 @@ def generate_plots_eta_element_temp(temperature_str_high, Y_n_str_high, Y_p_str_
     plt.loglog(temperature_str_low, Y_2H_str_low, color = 'purple', linestyle  = ':', label = '$\eta$ value is {}'.format(eta_value_low))
     plt.loglog(temperature_str_med, Y_2H_str_med, color = 'pink', linestyle  = '--', label = '$\eta$ value is {}'.format(eta_value_med))
     plt.loglog(temperature_str_high, Y_2H_str_high, color  = 'orange', label = '$\eta$ value is {}'.format(eta_value_high))
-    plt.xlim(10e-1, 10e-4)
+    #plt.xlim(10e-1, 10e-4)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance of Deutrium: Y(2H)')
     plt.legend()
@@ -184,7 +239,7 @@ def generate_plots_eta_element_temp(temperature_str_high, Y_n_str_high, Y_p_str_
     plt.loglog(temperature_str_low, Y_4He_str_low, color = 'purple', linestyle  = ':', label = '$\eta$ value is {}'.format(eta_value_low))
     plt.loglog(temperature_str_med, Y_4He_str_med, color = 'pink', linestyle  = '--', label = '$\eta$ value is {}'.format(eta_value_med))
     plt.loglog(temperature_str_high, Y_4He_str_high, color  = 'orange', label = '$\eta$ value is {}'.format(eta_value_high))
-    plt.xlim(10e-1, 10e-4)
+    #plt.xlim(10e-1, 10e-4)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance of Helium: Y(4He)')
     plt.legend()
@@ -193,7 +248,7 @@ def generate_plots_eta_element_temp(temperature_str_high, Y_n_str_high, Y_p_str_
     plt.loglog(temperature_str_low, Y_Be7_str_low, color = 'purple', linestyle  = ':', label = '$\eta$ value is {}'.format(eta_value_low))
     plt.loglog(temperature_str_med, Y_Be7_str_med, color = 'pink', linestyle  = '--', label = '$\eta$ value is {}'.format(eta_value_med))
     plt.loglog(temperature_str_high, Y_Be7_str_high, color  = 'orange', label = '$\eta$ value is {}'.format(eta_value_high))
-    plt.xlim(10e-1, 10e-4)
+    #plt.xlim(10e-1, 10e-4)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance of Beryllium: Y(Be7)')
     plt.legend()
@@ -202,7 +257,7 @@ def generate_plots_eta_element_temp(temperature_str_high, Y_n_str_high, Y_p_str_
     plt.loglog(temperature_str_low, Y_7Li_str_low, color = 'purple', linestyle  = ':', label = '$\eta$ value is {}'.format(eta_value_low))
     plt.loglog(temperature_str_med, Y_7Li_str_med, color = 'pink', linestyle  = '--', label = '$\eta$ value is {}'.format(eta_value_med))
     plt.loglog(temperature_str_high, Y_7Li_str_high, color  = 'orange', label = '$\eta$ value is {}'.format(eta_value_high))
-    plt.xlim(10e-1, 10e-4)
+    #plt.xlim(10e-1, 10e-4)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance of Lithium: Y(7Li)')
     plt.legend()
@@ -339,7 +394,7 @@ def generate_thermo_equal_plots(Y_n_str_high, Y_p_str_high, Y_2H_str_high, Y_4He
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance of Neutrons: Y(n)')
     plt.title('Thermodynamic Equilibrium vs. BBN')
-    plt.ylim(10**-16, 10**0)
+    #plt.ylim(10**-16, 10**0)
     #plt.xlim(10e-1, 10e-4)
     plt.xlim(max(temperature_str_med), min(temperature_str_med)) # universe starts hot and cools down
     plt.legend()
@@ -354,7 +409,7 @@ def generate_thermo_equal_plots(Y_n_str_high, Y_p_str_high, Y_2H_str_high, Y_4He
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance of Protons: Y(p)')
     plt.title('Thermodynamic Equilibrium vs. BBN')
-    plt.ylim(6*(10**-1), 9*(10**-1))
+    #plt.ylim(6*(10**-1), 9*(10**-1))
     plt.xlim(max(temperature_str_med), min(temperature_str_med))
     plt.legend(loc=0)
     
@@ -368,7 +423,7 @@ def generate_thermo_equal_plots(Y_n_str_high, Y_p_str_high, Y_2H_str_high, Y_4He
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance of Deutrium: Y(2H)')
     plt.title('Thermodynamic Equilibrium vs. BBN')
-    plt.ylim(10**-13, 10**-3)
+    #plt.ylim(10**-13, 10**-3)
     plt.xlim(max(temperature_str_med), min(temperature_str_med))
     plt.legend(loc=0)
     
@@ -382,7 +437,7 @@ def generate_thermo_equal_plots(Y_n_str_high, Y_p_str_high, Y_2H_str_high, Y_4He
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance of Helium: Y(4He)')
     plt.title('Thermodynamic Equilibrium vs. BBN')
-    plt.ylim(10**-29, 10**0)
+    #plt.ylim(10**-29, 10**0)
     plt.xlim(max(temperature_str_med), min(temperature_str_med))
     plt.legend()
     
@@ -396,7 +451,7 @@ def generate_thermo_equal_plots(Y_n_str_high, Y_p_str_high, Y_2H_str_high, Y_4He
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance of Lithium: Y(7Li)')
     plt.title('Thermodynamic Equilibrium vs. BBN')
-    plt.ylim(10**-31, 10**-7)
+    #plt.ylim(10**-31, 10**-7)
     plt.xlim(max(temperature_str_med), min(temperature_str_med))
     plt.legend()
     
@@ -410,8 +465,8 @@ def generate_thermo_equal_plots(Y_n_str_high, Y_p_str_high, Y_2H_str_high, Y_4He
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance of Berilium: Y(Berilium)')
     plt.title('Thermodynamic Equilibrium vs. BBN')
-    plt.xlim(10**-30, 10**-11)
-    plt.ylim(10e-20, 10)
+    #plt.xlim(10**-30, 10**-11)
+    #plt.ylim(10e-20, 10)
     plt.xlim(max(temperature_str_med), min(temperature_str_med))
     plt.legend(loc=0)
 
@@ -554,8 +609,8 @@ def CompareHighMedMassFrac(temperature_str_high, temperature_str_med, y_n_h, y_2
     plt.plot(temperature_str_med, y_n_m, color = 'cyan', label = '2 x n')
     plt.plot(temperature_str_med, y_50_2h_m, color = 'aquamarine', label = '50 x 2H')
     plt.plot(temperature_str_med, y_4he_m, color  = 'mediumseagreen', label = '4He')
-    plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
-    plt.ylim(0, 0.31)
+    #plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
+    #plt.ylim(0, 0.31)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance')
     plt.title('Comparing neutron to helium mass fractions')
@@ -573,8 +628,8 @@ def CompareHighMedMassFrac_seperate_plots(temperature_str_high, temperature_str_
     plt.plot(temperature_str_high, y_n_h, color = 'rebeccapurple', label = '2 x n')
     plt.plot(temperature_str_high, y_50_2h_h, color = 'mediumorchid', label = '50 x 2H')
     plt.plot(temperature_str_high, y_4he_h, color  = 'darkmagenta', label = '4He')
-    plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
-    plt.ylim(0, 0.31)
+    #plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
+    #plt.ylim(0, 0.31)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance')
     plt.title('Comparing neutron to helium mass fractions')
@@ -585,8 +640,8 @@ def CompareHighMedMassFrac_seperate_plots(temperature_str_high, temperature_str_
     plt.plot(temperature_str_med, y_n_m, color = 'cyan', label = '2 x n')
     plt.plot(temperature_str_med, y_50_2h_m, color = 'aquamarine', label = '50 x 2H')
     plt.plot(temperature_str_med, y_4he_m, color  = 'mediumseagreen', label = '4He')
-    plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
-    plt.ylim(0, 0.31)
+    #plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
+    #plt.ylim(0, 0.31)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance')
     plt.title('Comparing neutron to helium mass fractions')
@@ -616,8 +671,8 @@ def Li_Be(temperature_str_high, temperature_str_med, temperature_str_low, Y_7Li_
     plt.loglog(temperature_str_high, Y_Be7_str_high, color = 'orangered', label = '${}^7$ Beryllium high')
     plt.loglog(temperature_str_med, Y_Be7_str_med, color = 'tomato', linestyle = '--', label = '${}^7$ Beryllium med')
     plt.loglog(temperature_str_low, Y_Be7_str_low, color = 'salmon', linestyle = ':', label = '${}^7$ Beryllium low')
-    plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
-    plt.ylim(0, 0.31)
+    #plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
+    #plt.ylim(0, 0.31)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance')
     plt.title('Comparing Lithium and Berilium mass fractions')
@@ -633,8 +688,8 @@ def Li_Be_seperate_plots(temperature_str_high, temperature_str_med, temperature_
     plt.loglog(temperature_str_high, Y_7Li_str_high, color = 'darkgreen', label = '${}^7$ Lithium high')
     plt.loglog(temperature_str_med, Y_7Li_str_med, color = 'mediumseagreen', linestyle = '--', label = '${}^7$ Lithium med')
     plt.loglog(temperature_str_low, Y_7Li_str_low, color = 'forestgreen', linestyle = ':', label = '${}^7$ Lithium low')
-    plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
-    plt.ylim(0, 0.31)
+    #plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
+    #plt.ylim(0, 0.31)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance')
     plt.title('Comparing Lithium mass fractions')
@@ -644,8 +699,8 @@ def Li_Be_seperate_plots(temperature_str_high, temperature_str_med, temperature_
     plt.loglog(temperature_str_high, Y_Be7_str_high, color = 'orangered', label = '${}^7$ Beryllium high')
     plt.loglog(temperature_str_med, Y_Be7_str_med, color = 'tomato', linestyle = '--', label = '${}^7$ Beryllium med')
     plt.loglog(temperature_str_low, Y_Be7_str_low, color = 'salmon', linestyle = ':', label = '${}^7$ Beryllium low')
-    plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
-    plt.ylim(0, 0.31)
+    #plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
+    #plt.ylim(0, 0.31)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance')
     plt.title('Comparing Lithium mass fractions')

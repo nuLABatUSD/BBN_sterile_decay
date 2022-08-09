@@ -100,6 +100,7 @@ def eta_element_string_vs(eta_value, run_directory):
         
         #if c == 0:
         temperature_str = df['T (MeV)'].to_numpy()
+        dqdt_str = df['sigma_rad (MeV^4)'].to_numpy()
         Y_n_str = df['Y(n)'].to_numpy()
         Y_p_str = df['Y(p)'].to_numpy()
         Y_2H_str = df['Y(2H)'].to_numpy()
@@ -114,7 +115,7 @@ def eta_element_string_vs(eta_value, run_directory):
         
     #print("got here #2!")    
     
-    return temperature_str, Y_n_str, Y_p_str, Y_2H_str, Y_4He_str, Y_7Li_str, Y_Be7_str, eta_value
+    return temperature_str, dqdt_str, Y_n_str, Y_p_str, Y_2H_str, Y_4He_str, Y_7Li_str, Y_Be7_str, eta_value
 
 def eta_element_string_e(eta_value, run_directory):
     #eta_values = [low_value, med_value, high_value] #enter whatever eta values you want to go through here 
@@ -609,8 +610,8 @@ def CompareHighMedMassFrac(temperature_str_high, temperature_str_med, y_n_h, y_2
     plt.plot(temperature_str_med, y_n_m, color = 'cyan', label = '2 x n')
     plt.plot(temperature_str_med, y_50_2h_m, color = 'aquamarine', label = '50 x 2H')
     plt.plot(temperature_str_med, y_4he_m, color  = 'mediumseagreen', label = '4He')
-    #plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
-    #plt.ylim(0, 0.31)
+    plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
+    plt.ylim(0, 0.31)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance')
     plt.title('Comparing neutron to helium mass fractions')
@@ -628,8 +629,8 @@ def CompareHighMedMassFrac_seperate_plots(temperature_str_high, temperature_str_
     plt.plot(temperature_str_high, y_n_h, color = 'rebeccapurple', label = '2 x n')
     plt.plot(temperature_str_high, y_50_2h_h, color = 'mediumorchid', label = '50 x 2H')
     plt.plot(temperature_str_high, y_4he_h, color  = 'darkmagenta', label = '4He')
-    #plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
-    #plt.ylim(0, 0.31)
+    plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
+    plt.ylim(0, 0.31)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance')
     plt.title('Comparing neutron to helium mass fractions')
@@ -640,8 +641,8 @@ def CompareHighMedMassFrac_seperate_plots(temperature_str_high, temperature_str_
     plt.plot(temperature_str_med, y_n_m, color = 'cyan', label = '2 x n')
     plt.plot(temperature_str_med, y_50_2h_m, color = 'aquamarine', label = '50 x 2H')
     plt.plot(temperature_str_med, y_4he_m, color  = 'mediumseagreen', label = '4He')
-    #plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
-    #plt.ylim(0, 0.31)
+    plt.xlim(100*10**-3, 60*10**-3) # original graph was in keV from 100 to 60
+    plt.ylim(0, 0.31)
     plt.xlabel('Temperature (MeV)')
     plt.ylabel('Abundance')
     plt.title('Comparing neutron to helium mass fractions')

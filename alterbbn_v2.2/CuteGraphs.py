@@ -59,7 +59,7 @@ def delete_file(file):
 # **Enter the directory your alter_eta_edit.c file can be found in in the variable 'directory' below:**
 
 # In[6]:
-def eta_element_string_vs(eta_value, run_directory):
+def eta_element_string_vs(eta_value, run_directory, init_T):
     #eta_values = [low_value, med_value, high_value] #enter whatever eta values you want to go through here 
     
     c=0
@@ -70,7 +70,7 @@ def eta_element_string_vs(eta_value, run_directory):
 
     #for i in eta_values:
         #print(i)
-    d = subprocess.run([run_directory, '14.87365053664758', str(eta_value), '1', '255', '104.56255360706342', '300', '7e-05'], capture_output = True, text = True, shell = True)
+    d = subprocess.run([run_directory, init_T, str(eta_value), '1', '255', '104.56255360706342', '300', '7e-05'], capture_output = True, text = True, shell = True)
     #print(d)
     #print(d.stderr)
 

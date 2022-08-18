@@ -476,8 +476,7 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 {
     //printf("got here!\n");
 	int col = 3;
-	char folder[256]= "alterbbn_v2.2/";
-//	char folder[256]= "../alterbbn_v2.2/";
+	char folder[256]= "../";
 	paramrelic->vs_model = 1;
 	paramrelic->ms = ms_d;
 	paramrelic->mix = mix_d;
@@ -529,11 +528,11 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 
 	//strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); 
     
-    //strcat(folder,"alterbbn_v2.2/"); strcat(folder,"CSV Files/"); 
+    strcat(folder,"alterbbn_v2.2/"); strcat(folder,"CSV Files/"); 
     
-    strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); strcat(folder, "mass_");       strcat(folder,ms_ch); strcat(folder, "_mix_"); strcat(folder,mix_ch);
-    
-    /*
+    //strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); strcat(folder, "mass_");       strcat(folder,ms_ch); strcat(folder, "_mix_"); strcat(folder,mix_ch);
+        
+    // for Kathryn's code 
 	strcpy(fname_Tcm_rhonu, folder); strcat(fname_Tcm_rhonu, "T_rhonu.csv");
 	strcpy(fname_a_rhonu, folder); strcat(fname_a_rhonu, "a_rhonu.csv");
 	strcpy(fname_b_rhonu, folder); strcat(fname_b_rhonu, "b_rhonu.csv");
@@ -553,8 +552,10 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 	strcpy(fname_a_p2n, folder); strcat(fname_a_p2n, "a_pn.csv");
 	strcpy(fname_b_p2n, folder); strcat(fname_b_p2n, "b_pn.csv");
 	strcpy(fname_c_p2n, folder); strcat(fname_c_p2n, "c_pn.csv");
-	strcpy(fname_d_p2n, folder); strcat(fname_d_p2n, "d_pn.csv"); */
+	strcpy(fname_d_p2n, folder); strcat(fname_d_p2n, "d_pn.csv"); /*
     
+
+    //for Hannah's code
    	strcpy(fname_Tcm_rhonu, folder); strcat(fname_Tcm_rhonu, "_Tcm_rhonu.csv");
 	strcpy(fname_a_rhonu, folder); strcat(fname_a_rhonu, "_a_rhonu.csv");
 	strcpy(fname_b_rhonu, folder); strcat(fname_b_rhonu, "_b_rhonu.csv");
@@ -592,7 +593,7 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
     printf("%s \n",fname_a_p2n);
     printf("%s \n",fname_b_p2n);
     printf("%s \n",fname_c_p2n);
-    printf("%s \n",fname_d_p2n); 
+    printf("%s \n",fname_d_p2n); */
     
 
 	//the number of rows for the three data types might not be the same, but it should always be the same relative to each other (for example, row in dQdt will always be one less than in rhonu I think)

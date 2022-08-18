@@ -766,17 +766,17 @@ int nucl_single(struct relicparam* paramrelic, double ratioH[NNUC+1], struct err
 	{
 		if (paramrelic->vs_model)
 		{
-			output=fopen("evolution_vs.csv","w");
+			output=fopen("evolution_vs.out","w");
 			fprintf(output,"t(s), a, T (MeV), Tnu (MeV), photons, baryons, rho_{{nu}_{vs}}, drho_{{nu}_{vs}}, phi (GeV^4), rho_vs(MeV^4), sigma_rad (MeV^4), Y(n), Y(p), Y(2H), Y(3H), Y(3He), Y(4He), Y(6Li), Y(7Li), Y(7Be), eta\n");
 		}
 		else if (paramrelic->phi_model)
 		{
-			output=fopen("evolution_phi.csv","w");
+			output=fopen("evolution_phi.out","w");
 			fprintf(output,"t(s), a, T (MeV), Tnu (MeV), photons, baryons, rho_{nu}, drho_{nu}, phi (MeV^4), rho_vs(MeV^4), sigma_rad (MeV^4), Y(n), Y(p), Y(2H), Y(3H), Y(3He), Y(4He), Y(6Li), Y(7Li), Y(7Be), eta\n");
 		}
 		else
 		{
-			output=fopen("evolution.csv","w");
+			output=fopen("evolution.out","w");
 			fprintf(output,"t(s), a, T (MeV), Tnu (MeV), photons, baryons, rho_{nu}, drho_{nu}, phi (GeV^4), rho_vs(GeV^4), sigma_rad (GeV^4), Y(n), Y(p), Y(2H), Y(3H), Y(3He), Y(4He), Y(6Li), Y(7Li), Y(7Be), eta\n");
 		}
 	}

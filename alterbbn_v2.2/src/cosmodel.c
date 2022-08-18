@@ -476,7 +476,7 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 {
     //printf("got here!\n");
 	int col = 3;
-	char folder[256]= "../";
+	char folder[256]= "";
 	paramrelic->vs_model = 1;
 	paramrelic->ms = ms_d;
 	paramrelic->mix = mix_d;

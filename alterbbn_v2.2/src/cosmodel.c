@@ -526,9 +526,9 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 
 	/*strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); */
     
-    strcat(folder,"alterbbn_v2.2/"); strcat(folder,"CSV Files/"); 
+    strcat(folder,"alterbbn_v2.2/"); strcat(folder,"CSV Files/"); /*
     
-    /*strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); strcat(folder, "mass_");       strcat(folder,ms_ch); strcat(folder, "_mix_"); strcat(folder,mix_ch); */
+    strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); strcat(folder, "mass_");       strcat(folder,ms_ch); strcat(folder, "_mix_"); strcat(folder,mix_ch); */
     
     // for Kathryn's code 
 	strcpy(fname_Tcm_rhonu, folder); strcat(fname_Tcm_rhonu, "T_rhonu.csv");
@@ -574,7 +574,7 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 	strcpy(fname_c_p2n, folder); strcat(fname_c_p2n, "_c_pn.csv");
 	strcpy(fname_d_p2n, folder); strcat(fname_d_p2n, "_d_pn.csv");
     
-    
+    /*
     printf("print names now please: \n");
     printf("%s \n", fname_Tcm_rhonu);
     printf("%s \n",fname_a_rhonu);

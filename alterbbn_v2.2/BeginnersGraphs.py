@@ -104,14 +104,16 @@ def output_plots_alter_vs(nu_start, nu_end, nu_steps, run_directory_new, init_T,
     plt.xlabel('$\eta_0$')
     #plt.ylim(10e-11, 10e-9)
     #plt.xlim(1e-10, 10e-10)
+    #plt.savefig('Li7.jpg')
     plt.show()
 
-    plt.figure()
+    #plt.figure()
     plt.loglog(nu, He3_H_vs)
     plt.ylabel('He3/H')
     plt.xlabel('$\eta_0$')
     #plt.ylim(10e-7, 10e-4)
     #plt.xlim(1e-10, 10e-10)
+    #plt.savefig('He3.jpg')
     plt.show()
     
     #return Yp_vs, H2_H_vs, He3_H_vs, Li7_H_vs, Li6_H_vs

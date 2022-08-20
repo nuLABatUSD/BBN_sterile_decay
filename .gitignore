@@ -1,0 +1,4 @@
+*.x
+*.a
+.ipynb_checkpoints/
+*.out

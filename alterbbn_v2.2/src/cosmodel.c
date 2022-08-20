@@ -451,6 +451,8 @@ void read_csv(int row, int col, char *filename, double **data)
 {
 	FILE *file;
 	file = fopen(filename, "r"); //what's the r?
+    
+    if (file == NULL) {printf("missing %s\n", filename);}
 
 	int i = 0;
 	char line[4098];
@@ -474,7 +476,7 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 {
     //printf("got here!\n");
 	int col = 3;
-	char folder[256]= "../";
+	char folder[256]= "";
 	paramrelic->vs_model = 1;
 	paramrelic->ms = ms_d;
 	paramrelic->mix = mix_d;
@@ -524,12 +526,14 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 	double **data_c_p2n;
 	double **data_d_p2n;
 
-	/*strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); */
+	//strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); 
     
     strcat(folder,"alterbbn_v2.2/"); strcat(folder,"CSV Files/"); /*
     
+
     strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); strcat(folder, "mass_");       strcat(folder,ms_ch); strcat(folder, "_mix_"); strcat(folder,mix_ch); */
     
+
     // for Kathryn's code 
 	strcpy(fname_Tcm_rhonu, folder); strcat(fname_Tcm_rhonu, "T_rhonu.csv");
 	strcpy(fname_a_rhonu, folder); strcat(fname_a_rhonu, "a_rhonu.csv");
@@ -552,6 +556,7 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 	strcpy(fname_c_p2n, folder); strcat(fname_c_p2n, "c_pn.csv");
 	strcpy(fname_d_p2n, folder); strcat(fname_d_p2n, "d_pn.csv"); /*
     
+
     //for Hannah's code
    	strcpy(fname_Tcm_rhonu, folder); strcat(fname_Tcm_rhonu, "_Tcm_rhonu.csv");
 	strcpy(fname_a_rhonu, folder); strcat(fname_a_rhonu, "_a_rhonu.csv");

@@ -767,7 +767,7 @@ int nucl_single(struct relicparam* paramrelic, double ratioH[NNUC+1], struct err
 		if (paramrelic->vs_model)
 		{
 			output=fopen("evolution_vs.out","w");
-			fprintf(output,"t(s), a, T (MeV), Tnu (MeV), photons, baryons, rho_{{nu}_{vs}}, drho_{{nu}_{vs}}, phi (GeV^4), rho_vs(MeV^4), sigma_rad (MeV^4), Y(n), Y(p), Y(2H), Y(3H), Y(3He), Y(4He), Y(6Li), Y(7Li), Y(7Be), eta\n");
+			fprintf(output,"t(s), a, T (MeV), Tnu (MeV), photons, baryons, rho_{{nu}_{vs}}, drho_{{nu}_{vs}}, phi (GeV^4), rho_vs(MeV^4), sigma_rad (MeV^4), Y(n), Y(p), Y(2H), Y(3H), Y(3He), Y(4He), Y(6Li), Y(7Li), Y(7Be), eta, pn, np\n");
 		}
 		else if (paramrelic->phi_model)
 		{
@@ -1322,7 +1322,7 @@ int nucl_single(struct relicparam* paramrelic, double ratioH[NNUC+1], struct err
 #ifdef OUTPUT
 				if (paramrelic->err==0)
 				{
-					if (paramrelic->vs_model) {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens_vs(Tnu,paramrelic),neutdens_deriv_vs(Tnu,paramrelic),rho_phi,rho_vs*pow(1000,4.),dQdt_vs(T,paramrelic)*pow(1000,4.)/T,Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)));}
+					if (paramrelic->vs_model) {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e, %.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens_vs(Tnu,paramrelic),neutdens_deriv_vs(Tnu,paramrelic),rho_phi,rho_vs*pow(1000,4.),dQdt_vs(T,paramrelic)*pow(1000,4.)/T,Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)), n2p_vs(T, paramrelic) * pow(1000, 4.) / T, p2n_vs(T, paramrelic) * pow(1000, 4.) / T);}
 					else if (paramrelic->phi_model) {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens(Tnu,paramrelic),neutdens_deriv(Tnu,paramrelic),rho_phi,rho_vs,paramrelic->Gamma_phi*rho_phi*pow(1000,4.)/T,Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)));}
 					else {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens(Tnu,paramrelic),neutdens_deriv(Tnu,paramrelic),rho_phi,rho_vs,entropy_Sigmarad(T,paramrelic),Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)));}
 				}
@@ -1660,7 +1660,7 @@ int nucl_single(struct relicparam* paramrelic, double ratioH[NNUC+1], struct err
 #ifdef OUTPUT
 				if (paramrelic->err==0)
 				{
-					if (paramrelic->vs_model) {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens_vs(Tnu,paramrelic),neutdens_deriv_vs(Tnu,paramrelic),rho_phi,rho_vs*pow(1000,4.),dQdt_vs(T,paramrelic)*pow(1000,4.)/T,Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)));}
+					if (paramrelic->vs_model) { fprintf(output, "%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e, %.5e,%.5e\n", t / s_to_GeV, a, T * 1000, Tnu * 1000, pow(pi, 2.) / 15. * pow(T, 4.), h_eta * pow(T, 3.), neutdens_vs(Tnu, paramrelic), neutdens_deriv_vs(Tnu, paramrelic), rho_phi, rho_vs * pow(1000, 4.), dQdt_vs(T, paramrelic) * pow(1000, 4.) / T, Y[1], Y[2], Y[3], Y[4], Y[5], Y[6], Y[7], Y[8], Y[9], h_eta / (M_u * g_to_GeV * 2. * zeta3 / pow(pi, 2.)), n2p_vs(T, paramrelic) * pow(1000, 4.) / T, p2n_vs(T, paramrelic) * pow(1000, 4.) / T); }
 					else if (paramrelic->phi_model) {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens(Tnu,paramrelic),neutdens_deriv(Tnu,paramrelic),rho_phi,rho_vs,paramrelic->Gamma_phi*rho_phi*pow(1000,4.)/T,Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)));}
 					else {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens(Tnu,paramrelic),neutdens_deriv(Tnu,paramrelic),rho_phi,rho_vs,entropy_Sigmarad(T,paramrelic),Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)));}
 				}
@@ -2072,7 +2072,7 @@ int nucl_single(struct relicparam* paramrelic, double ratioH[NNUC+1], struct err
 #ifdef OUTPUT
 				if (paramrelic->err==0)
 				{
-					if (paramrelic->vs_model) {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens_vs(Tnu,paramrelic),neutdens_deriv_vs(Tnu,paramrelic),rho_phi,rho_vs*pow(1000,4.),dQdt_vs(T,paramrelic)*pow(1000,4.)/T,Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)));}
+					if (paramrelic->vs_model) { fprintf(output, "%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e, %.5e,%.5e\n", t / s_to_GeV, a, T * 1000, Tnu * 1000, pow(pi, 2.) / 15. * pow(T, 4.), h_eta * pow(T, 3.), neutdens_vs(Tnu, paramrelic), neutdens_deriv_vs(Tnu, paramrelic), rho_phi, rho_vs * pow(1000, 4.), dQdt_vs(T, paramrelic) * pow(1000, 4.) / T, Y[1], Y[2], Y[3], Y[4], Y[5], Y[6], Y[7], Y[8], Y[9], h_eta / (M_u * g_to_GeV * 2. * zeta3 / pow(pi, 2.)), n2p_vs(T, paramrelic) * pow(1000, 4.) / T, p2n_vs(T, paramrelic) * pow(1000, 4.) / T); }
 					else if (paramrelic->phi_model) {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens(Tnu,paramrelic),neutdens_deriv(Tnu,paramrelic),rho_phi,rho_vs,paramrelic->Gamma_phi*rho_phi*pow(1000,4.)/T,Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)));}
 					else {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens(Tnu,paramrelic),neutdens_deriv(Tnu,paramrelic),rho_phi,rho_vs,entropy_Sigmarad(T,paramrelic),Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)));}
 				}
@@ -2409,7 +2409,7 @@ int nucl_single(struct relicparam* paramrelic, double ratioH[NNUC+1], struct err
 #ifdef OUTPUT
 				if (paramrelic->err==0)
 				{
-					if (paramrelic->vs_model) {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens_vs(Tnu,paramrelic),neutdens_deriv_vs(Tnu,paramrelic),rho_phi,rho_vs*pow(1000,4.),dQdt_vs(T,paramrelic)*pow(1000,4.)/T,Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)));}
+					if (paramrelic->vs_model) { fprintf(output, "%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e, %.5e,%.5e\n", t / s_to_GeV, a, T * 1000, Tnu * 1000, pow(pi, 2.) / 15. * pow(T, 4.), h_eta * pow(T, 3.), neutdens_vs(Tnu, paramrelic), neutdens_deriv_vs(Tnu, paramrelic), rho_phi, rho_vs * pow(1000, 4.), dQdt_vs(T, paramrelic) * pow(1000, 4.) / T, Y[1], Y[2], Y[3], Y[4], Y[5], Y[6], Y[7], Y[8], Y[9], h_eta / (M_u * g_to_GeV * 2. * zeta3 / pow(pi, 2.)), n2p_vs(T, paramrelic) * pow(1000, 4.) / T, p2n_vs(T, paramrelic) * pow(1000, 4.) / T); }
 					else if (paramrelic->phi_model) {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens(Tnu,paramrelic),neutdens_deriv(Tnu,paramrelic),rho_phi,rho_vs,paramrelic->Gamma_phi*rho_phi*pow(1000,4.)/T,Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)));}
 					else {fprintf(output,"%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e,%.5e\n",t/s_to_GeV,a,T*1000,Tnu*1000,pow(pi,2.)/15.*pow(T,4.),h_eta*pow(T,3.),neutdens(Tnu,paramrelic),neutdens_deriv(Tnu,paramrelic),rho_phi,rho_vs,entropy_Sigmarad(T,paramrelic),Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],h_eta/(M_u*g_to_GeV*2.*zeta3/pow(pi,2.)));}
 				}

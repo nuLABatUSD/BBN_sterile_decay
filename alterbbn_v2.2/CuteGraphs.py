@@ -92,7 +92,7 @@ def eta_element_string_vs(eta_value, run_directory, init_T):
             a = text[i]
             b = a.split(',')
             df.loc[i] = b
-
+        #df['np'] = df['np\n']
         df = df.replace({'\n':''},regex=True)
         df = df.apply(pd.to_numeric)
         #print("df print 2: {}".format(df))
@@ -100,7 +100,11 @@ def eta_element_string_vs(eta_value, run_directory, init_T):
         
         #if c == 0:
         temperature_str = df['T (MeV)'].to_numpy()
+        temperature_nu_str = df['Tnu (MeV)'].to_numpy()
         dqdt_str = df['sigma_rad (MeV^4)'].to_numpy()
+        rhonu_str = df['rho_{{nu}_{vs}}'].to_numpy()
+        np_str = df['np\n'].to_numpy()
+        pn_str = df['pn'].to_numpy()
         Y_n_str = df['Y(n)'].to_numpy()
         Y_p_str = df['Y(p)'].to_numpy()
         Y_2H_str = df['Y(2H)'].to_numpy()
@@ -115,7 +119,7 @@ def eta_element_string_vs(eta_value, run_directory, init_T):
         
     #print("got here #2!")    
     
-    return temperature_str, dqdt_str, Y_n_str, Y_p_str, Y_2H_str, Y_4He_str, Y_7Li_str, Y_Be7_str, eta_value
+    return temperature_str, temperature_nu_str, dqdt_str, rhonu_str, Y_n_str, Y_p_str, Y_2H_str, Y_4He_str, Y_7Li_str, Y_Be7_str, eta_value, np_str, pn_str
 
 def eta_element_string_e(eta_value, run_directory):
     #eta_values = [low_value, med_value, high_value] #enter whatever eta values you want to go through here 

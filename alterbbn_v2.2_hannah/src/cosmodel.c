@@ -451,6 +451,8 @@ void read_csv(int row, int col, char *filename, double **data)
 {
 	FILE *file;
 	file = fopen(filename, "r"); //what's the r?
+    
+    if (file == NULL) {printf("missing %s\n", filename);}
 
 	int i = 0;
 	char line[4098];
@@ -472,8 +474,10 @@ void read_csv(int row, int col, char *filename, double **data)
 
 void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, double ns0, int row, struct relicparam* paramrelic)
 {
+    //printf("got here!\n");
 	int col = 3;
-	char folder[256] = "../";
+	char folder[256]= "alterbbn_v2.2/";
+//	char folder[256]= "../alterbbn_v2.2/";
 	paramrelic->vs_model = 1;
 	paramrelic->ms = ms_d;
 	paramrelic->mix = mix_d;
@@ -523,9 +527,35 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 	double **data_c_p2n;
 	double **data_d_p2n;
 
-	strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); strcat(folder, "mass_"); strcat(folder,ms_ch); strcat(folder, "_mix_"); strcat(folder,mix_ch);
-
-	strcpy(fname_Tcm_rhonu, folder); strcat(fname_Tcm_rhonu, "_Tcm_rhonu.csv");
+	//strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); 
+    
+    //strcat(folder,"alterbbn_v2.2/"); strcat(folder,"CSV Files/"); 
+    
+    strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); strcat(folder, "mass_");       strcat(folder,ms_ch); strcat(folder, "_mix_"); strcat(folder,mix_ch);
+    
+    /*
+	strcpy(fname_Tcm_rhonu, folder); strcat(fname_Tcm_rhonu, "T_rhonu.csv");
+	strcpy(fname_a_rhonu, folder); strcat(fname_a_rhonu, "a_rhonu.csv");
+	strcpy(fname_b_rhonu, folder); strcat(fname_b_rhonu, "b_rhonu.csv");
+	strcpy(fname_c_rhonu, folder); strcat(fname_c_rhonu, "c_rhonu.csv");
+	strcpy(fname_d_rhonu, folder); strcat(fname_d_rhonu, "d_rhonu.csv");
+	strcpy(fname_T_dQdt, folder); strcat(fname_T_dQdt, "T_dQdt.csv");
+	strcpy(fname_a_dQdt, folder); strcat(fname_a_dQdt, "a_dQdt.csv");
+	strcpy(fname_b_dQdt, folder); strcat(fname_b_dQdt, "b_dQdt.csv");
+	strcpy(fname_c_dQdt, folder); strcat(fname_c_dQdt, "c_dQdt.csv");
+	strcpy(fname_d_dQdt, folder); strcat(fname_d_dQdt, "d_dQdt.csv");
+	strcpy(fname_T_n2p, folder); strcat(fname_T_n2p, "T_np.csv");
+	strcpy(fname_a_n2p, folder); strcat(fname_a_n2p, "a_np.csv");
+	strcpy(fname_b_n2p, folder); strcat(fname_b_n2p, "b_np.csv");
+	strcpy(fname_c_n2p, folder); strcat(fname_c_n2p, "c_np.csv");
+	strcpy(fname_d_n2p, folder); strcat(fname_d_n2p, "d_np.csv");
+	strcpy(fname_T_p2n, folder); strcat(fname_T_p2n, "T_pn.csv");
+	strcpy(fname_a_p2n, folder); strcat(fname_a_p2n, "a_pn.csv");
+	strcpy(fname_b_p2n, folder); strcat(fname_b_p2n, "b_pn.csv");
+	strcpy(fname_c_p2n, folder); strcat(fname_c_p2n, "c_pn.csv");
+	strcpy(fname_d_p2n, folder); strcat(fname_d_p2n, "d_pn.csv"); */
+    
+   	strcpy(fname_Tcm_rhonu, folder); strcat(fname_Tcm_rhonu, "_Tcm_rhonu.csv");
 	strcpy(fname_a_rhonu, folder); strcat(fname_a_rhonu, "_a_rhonu.csv");
 	strcpy(fname_b_rhonu, folder); strcat(fname_b_rhonu, "_b_rhonu.csv");
 	strcpy(fname_c_rhonu, folder); strcat(fname_c_rhonu, "_c_rhonu.csv");
@@ -545,6 +575,25 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 	strcpy(fname_b_p2n, folder); strcat(fname_b_p2n, "_b_pn.csv");
 	strcpy(fname_c_p2n, folder); strcat(fname_c_p2n, "_c_pn.csv");
 	strcpy(fname_d_p2n, folder); strcat(fname_d_p2n, "_d_pn.csv");
+    
+    
+    printf("print names now please: \n");
+    printf("%s \n", fname_Tcm_rhonu);
+    printf("%s \n",fname_a_rhonu);
+    printf("%s \n",fname_b_rhonu);
+    printf("%s \n",fname_c_rhonu);
+    printf("%s \n",fname_d_rhonu);
+    printf("%s \n",fname_T_dQdt);
+    printf("%s \n",fname_a_dQdt);
+    printf("%s \n",fname_b_dQdt);
+    printf("%s \n",fname_c_dQdt);
+    printf("%s \n",fname_d_dQdt);
+    printf("%s \n",fname_T_n2p);
+    printf("%s \n",fname_a_p2n);
+    printf("%s \n",fname_b_p2n);
+    printf("%s \n",fname_c_p2n);
+    printf("%s \n",fname_d_p2n); 
+    
 
 	//the number of rows for the three data types might not be the same, but it should always be the same relative to each other (for example, row in dQdt will always be one less than in rhonu I think)
 	data_Tcm_rhonu = (double **)malloc(row * sizeof(double *));
@@ -646,6 +695,8 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 	}
 	return;
 }
+// END OF INIT_VS() !!!!
+
 
 double rate1_vs(double ms, double mix)
 {

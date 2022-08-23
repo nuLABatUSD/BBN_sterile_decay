@@ -1,0 +1,9 @@
+*.x
+*.a
+
+alterbbn_v2.2/src/FlagsForMake
+alterbbn_v2.2/src/libbn.a
+*.o
+.ipynb_checkpoints/
+*.out
+

@@ -476,7 +476,7 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 {
     //printf("got here!\n");
 	int col = 3;
-	char folder[256]= "";
+	char folder[256]= "../";
 	paramrelic->vs_model = 1;
 	paramrelic->ms = ms_d;
 	paramrelic->mix = mix_d;
@@ -528,7 +528,7 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 
 	//strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); 
     
-    strcat(folder,"alterbbn_v2.2/"); strcat(folder,"CSV_Files/"); /*
+    strcat(folder,"alterbbn_v2.2/"); strcat(folder,"CSVFiles/"); /*
     
 
     strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); strcat(folder, "mass_");       strcat(folder,ms_ch); strcat(folder, "_mix_"); strcat(folder,mix_ch); */
@@ -577,7 +577,7 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 	strcpy(fname_a_p2n, folder); strcat(fname_a_p2n, "_a_pn.csv");
 	strcpy(fname_b_p2n, folder); strcat(fname_b_p2n, "_b_pn.csv");
 	strcpy(fname_c_p2n, folder); strcat(fname_c_p2n, "_c_pn.csv");
-	strcpy(fname_d_p2n, folder); strcat(fname_d_p2n, "_d_pn.csv");
+	strcpy(fname_d_p2n, folder); strcat(fname_d_p2n, "_d_pn.csv");*/
     
     
     printf("print names now please: \n");
@@ -597,7 +597,7 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
     printf("%s \n",fname_c_p2n);
     printf("%s \n",fname_d_p2n); 
     
-*/
+
 	//the number of rows for the three data types might not be the same, but it should always be the same relative to each other (for example, row in dQdt will always be one less than in rhonu I think)
 	data_Tcm_rhonu = (double **)malloc(row * sizeof(double *));
 	data_a_rhonu = (double **)malloc(row * sizeof(double *));

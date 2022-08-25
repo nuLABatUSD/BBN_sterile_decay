@@ -59,7 +59,7 @@ def delete_file(file):
 # **Enter the directory your alter_eta_edit.c file can be found in in the variable 'directory' below:**
 
 # In[6]:
-def eta_element_string_vs(eta_value, run_directory, init_T):
+def eta_element_string_vs(eta_value, run_directory, init_T, isPC = True):
     #eta_values = [low_value, med_value, high_value] #enter whatever eta values you want to go through here 
     
     c=0
@@ -70,7 +70,7 @@ def eta_element_string_vs(eta_value, run_directory, init_T):
 
     #for i in eta_values:
         #print(i)
-    d = subprocess.run([run_directory, init_T, str(eta_value), '1', '255', '104.56255360706342', '300', '7e-05'], capture_output = True, text = True, shell = True)
+    d = subprocess.run([run_directory, init_T, str(eta_value), '1', '255', '104.56255360706342', '300', '7e-05'], capture_output = True, text = True, shell = isPC)
     #print(d)
     #print(d.stderr)
 
@@ -121,7 +121,7 @@ def eta_element_string_vs(eta_value, run_directory, init_T):
     
     return temperature_str, temperature_nu_str, dqdt_str, rhonu_str, Y_n_str, Y_p_str, Y_2H_str, Y_4He_str, Y_7Li_str, Y_Be7_str, eta_value, np_str, pn_str
 
-def eta_element_string_e(eta_value, run_directory):
+def eta_element_string_e(eta_value, run_directory, isPC = True):
     #eta_values = [low_value, med_value, high_value] #enter whatever eta values you want to go through here 
     
     c=0
@@ -132,7 +132,7 @@ def eta_element_string_e(eta_value, run_directory):
 
     #for i in eta_values:
         #print(i)
-    d = subprocess.run([run_directory, str(eta_value)], capture_output = True, text = True, shell = True)
+    d = subprocess.run([run_directory, str(eta_value)], capture_output = True, text = True, shell = isPC)
     #print(d.stderr)
 
     check_file = Path("evolution.out")

@@ -696,6 +696,11 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 		paramrelic->ddQdt[i] = data_d_dQdt[i+1][1];
 		//printf("%.15e, %.15e, %.15e, %.15e, %.15e \n", paramrelic->TdQdt[i], paramrelic->adQdt[i], paramrelic->bdQdt[i], paramrelic->cdQdt[i], paramrelic->ddQdt[i]);
 	}
+    
+    for (int i=40; i < 50; i++)
+    {
+        printf("%.15e, %.15e, %.15e \n", paramrelic->Tnp[i], paramrelic->dnp[i], n2p_vs(paramrelic->Tnp[i]/K_to_eV/1000., paramrelic));
+    }
 	return;
 }
 // END OF INIT_VS() !!!!

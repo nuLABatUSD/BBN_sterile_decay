@@ -528,7 +528,7 @@ void Init_vs(char ms_ch[256], char mix_ch[256], double ms_d, double mix_d, doubl
 
 	//strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); 
     
-    strcat(folder,"alterbbn_v2.2/"); strcat(folder,"CSVFiles/"); /*
+    strcat(folder,"alterbbn_v2.2/"); strcat(folder,"CSVFiles/"); /* //CSV_Files is Hannah's files
     
 
     strcat(folder,ms_ch); strcat(folder,"-"); strcat(folder,mix_ch); strcat(folder,"-FullTestNew/"); strcat(folder, "mass_");       strcat(folder,ms_ch); strcat(folder, "_mix_"); strcat(folder,mix_ch); */
@@ -793,7 +793,7 @@ double n2p_vs(double T9, struct relicparam* paramrelic)
 	T_cs = paramrelic->Tnp[index];
 	a = paramrelic->anp[index]; b = paramrelic->bnp[index]; c = paramrelic->cnp[index]; d = paramrelic->dnp[index];
 	n2p = a*pow((Thold-T_cs),3.) + b*pow((Thold-T_cs),2.) + c*(Thold-T_cs) + d;
-	n2p = n2p; //turn into some other unit??
+	n2p = exp(n2p); //turn into some other unit??
 
 	return n2p;
 }
@@ -813,7 +813,7 @@ double p2n_vs(double T9, struct relicparam* paramrelic)
 	T_cs = paramrelic->Tpn[index];
 	a = paramrelic->apn[index]; b = paramrelic->bpn[index]; c = paramrelic->cpn[index]; d = paramrelic->dpn[index];
 	p2n = a*pow((Thold-T_cs),3.) + b*pow((Thold-T_cs),2.) + c*(Thold-T_cs) + d;
-	p2n = p2n; //turn into some other unit??
+	p2n = exp(p2n); //turn into some other unit??
 
 	return p2n;
 }

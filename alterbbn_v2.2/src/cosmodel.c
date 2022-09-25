@@ -782,6 +782,7 @@ double n2p_vs(double T9, struct relicparam* paramrelic)
 {
 	double Thold = T9*K_to_eV*1000; // T9 is in Kelvin, so K_to_eV turns it into GeV (not eV as one may think), then multiplying by 1000 gives MeV
 	double n2p;
+    double log_n2p;
 	int index = 0;
 	double a,b,c,d,T_cs;
 
@@ -792,8 +793,9 @@ double n2p_vs(double T9, struct relicparam* paramrelic)
 
 	T_cs = paramrelic->Tnp[index];
 	a = paramrelic->anp[index]; b = paramrelic->bnp[index]; c = paramrelic->cnp[index]; d = paramrelic->dnp[index];
-	n2p = a*pow((Thold-T_cs),3.) + b*pow((Thold-T_cs),2.) + c*(Thold-T_cs) + d;
-	n2p = exp(n2p); //turn into some other unit??
+    log_n2p = a*pow((Thold-T_cs),3.) + b*pow((Thold-T_cs),2.)  + c * ( log(Thold/T_cs )) + d; //this is a log 
+	//n2p = a*pow((Thold-T_cs),3.) + b*pow((Thold-T_cs),2.) + c*(Thold-T_cs) + d;
+	n2p = exp(log_n2p); //turn into some other unit??
 
 	return n2p;
 }
@@ -802,6 +804,7 @@ double p2n_vs(double T9, struct relicparam* paramrelic)
 {
 	double Thold = T9*K_to_eV*1000; //// T9 is in Kelvin, so K_to_eV turns it into GeV (not eV as one may think), then multiplying by 1000 gives MeV
 	double p2n;
+    double log_p2n;
 	int index = 0;
 	double a,b,c,d,T_cs;
 
@@ -812,8 +815,9 @@ double p2n_vs(double T9, struct relicparam* paramrelic)
 
 	T_cs = paramrelic->Tpn[index];
 	a = paramrelic->apn[index]; b = paramrelic->bpn[index]; c = paramrelic->cpn[index]; d = paramrelic->dpn[index];
-	p2n = a*pow((Thold-T_cs),3.) + b*pow((Thold-T_cs),2.) + c*(Thold-T_cs) + d;
-	p2n = exp(p2n); //turn into some other unit??
+	//p2n = a*pow((Thold-T_cs),3.) + b*pow((Thold-T_cs),2.) + c*(Thold-T_cs) + d;
+    log_p2n = a*pow((Thold-T_cs),3.) + b*pow((Thold-T_cs),2.)  + c * ( log(Thold/T_cs )) + d; //this is a log
+	p2n = exp(log_p2n); //turn into some other unit??
 
 	return p2n;
 }

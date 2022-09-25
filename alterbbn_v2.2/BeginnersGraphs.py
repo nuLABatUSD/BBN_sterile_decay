@@ -97,6 +97,8 @@ def output_plots_alter_vs(nu_start, nu_end, nu_steps, run_directory_new, init_T,
         Li6_H_vs[a] = float(s[16])
         #Be7_H[a] = float(s[17])
         a += 1
+        
+    #print(np.abs(Li7_H_vs))
     
     plt.figure()
     plt.loglog(nu, Li7_H_vs)
@@ -106,7 +108,9 @@ def output_plots_alter_vs(nu_start, nu_end, nu_steps, run_directory_new, init_T,
     #plt.xlim(1e-10, 10e-10)
     #plt.savefig('Li7.jpg')
     plt.show()
-
+    
+    #print(np.abs(He3_H_vs))
+    
     #plt.figure()
     plt.loglog(nu, He3_H_vs)
     plt.ylabel('He3/H')

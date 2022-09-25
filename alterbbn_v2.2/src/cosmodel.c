@@ -793,7 +793,7 @@ double n2p_vs(double T9, struct relicparam* paramrelic)
 
 	T_cs = paramrelic->Tnp[index];
 	a = paramrelic->anp[index]; b = paramrelic->bnp[index]; c = paramrelic->cnp[index]; d = paramrelic->dnp[index];
-    log_n2p = a*pow((Thold-T_cs),3.) + b*pow((Thold-T_cs),2.)  + c * ( log(Thold/T_cs )) + d; //this is a log 
+    log_n2p = a*pow(log(Thold/T_cs),3.) + b*pow(log(Thold/T_cs),2.)  + c*(log(Thold/T_cs )) + d; //this is a log 
 	//n2p = a*pow((Thold-T_cs),3.) + b*pow((Thold-T_cs),2.) + c*(Thold-T_cs) + d;
 	n2p = exp(log_n2p); //turn into some other unit??
 
@@ -816,7 +816,7 @@ double p2n_vs(double T9, struct relicparam* paramrelic)
 	T_cs = paramrelic->Tpn[index];
 	a = paramrelic->apn[index]; b = paramrelic->bpn[index]; c = paramrelic->cpn[index]; d = paramrelic->dpn[index];
 	//p2n = a*pow((Thold-T_cs),3.) + b*pow((Thold-T_cs),2.) + c*(Thold-T_cs) + d;
-    log_p2n = a*pow((Thold-T_cs),3.) + b*pow((Thold-T_cs),2.)  + c * ( log(Thold/T_cs )) + d; //this is a log
+    log_p2n = a*pow(log(Thold/T_cs),3.) + b*pow(log(Thold/T_cs),2.)  + c*(log(Thold/T_cs )) + d; //this is a log
 	p2n = exp(log_p2n); //turn into some other unit??
 
 	return p2n;

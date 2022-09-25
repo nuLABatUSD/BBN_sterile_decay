@@ -199,8 +199,8 @@ void rate_pn_noerr_vs(double f[], double r[], double T9, double Tnu, relicparam*
   //double I0 = rate_pn_enu(1,0,0,paramrelic, paramerror); //yo what is this??
   double n2p = n2p_vs(T9,paramrelic);
   double p2n = p2n_vs(T9,paramrelic);
-  f[1]=n2p*(1.52*10e21);
-  r[1]=p2n*(1.52*10e21);
+  f[1]=n2p*(1.52e21);
+  r[1]=p2n*(1.52e21);
   //printf("For vs models f[1] is %.15e\n",f[1]);
   return;
 }
